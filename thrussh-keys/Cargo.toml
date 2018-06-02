@@ -1,0 +1,52 @@
+[package]
+name = "thrussh-keys"
+version = "0.9.5"
+authors = ["Pierre-Étienne Meunier <pe@pijul.org>"]
+description = "Deal with SSH keys: load them, decrypt them, call an SSH agent."
+keywords = ["ssh"]
+repository = "https://nest.pijul.com/pijul_org/thrussh"
+homepage = "https://pijul.org/thrussh"
+documentation = "https://docs.rs/thrussh-keys"
+license = "Apache-2.0"
+include = [
+        "Cargo.toml",
+        "src/lib.rs",
+        "src/pem.rs",
+        "src/agent/mod.rs",
+        "src/agent/msg.rs",
+        "src/agent/server.rs",
+        "src/agent/client.rs",
+        "src/bcrypt_pbkdf.rs",
+        "src/blowfish.rs",
+        "src/encoding.rs",
+        "src/format/mod.rs",
+        "src/format/openssh.rs",
+        "src/format/pkcs5.rs",
+        "src/format/pkcs8.rs",
+        "src/key.rs",
+        "src/signature.rs"
+        ]
+
+[dependencies]
+base64 = "0.8"
+byteorder = "1.2"
+tokio-core = { git = "https://github.com/redox-os/tokio-core" }
+tokio-io = { git = "https://github.com/redox-os/tokio" }
+futures = "0.1"
+#cryptovec = "0.4"
+cryptovec = { path = "/home/wesley/Workspace/Rust/Redox/cryptovec" }
+error-chain = "0.11"
+hex = "0.3"
+yasna = "0.1"
+num-bigint = { version = "0.1", default-features = false }
+num-integer = { version = "0.1", default-features = false }
+openssl = "0.10"
+bit-vec = "0.4"
+thrussh-libsodium = "0.1"
+serde_derive = "1.0"
+serde = "1.0"
+
+[dev-dependencies]
+env_logger = "0.3"
+tempdir="0.3"
+tokio-uds = { git = "https://github.com/redox-os/tokio" }

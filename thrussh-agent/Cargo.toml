@@ -1,0 +1,27 @@
+[package]
+name = "thrussh-agent"
+version = "0.1.0"
+authors = ["pe@pijul.org <pe@pijul.org>"]
+license = "Apache-2.0/MIT"
+description = "An SSH agent, including a server (thrussh-agent) and a client (thrussh-add)."
+repository = "https://nest.pijul.com/pijul_org/thrussh"
+include = [ "Cargo.toml", "src/thrussh-agent.rs", "src/thrussh-add.rs" ]
+
+[dependencies]
+#thrussh-keys = "0.8.1"
+thrussh-keys = { path = "../thrussh-keys" }
+futures = "0.1"
+tokio-uds = { git = "https://github.com/redox-os/tokio" }
+tokio-core = { git = "https://github.com/redox-os/tokio-core" }
+clap = "2.28"
+rand = "0.3"
+libc = "0.2"
+termion = "1.5"
+
+[[bin]]
+name = "thrussh-agent"
+path = "src/thrussh-agent.rs"
+
+[[bin]]
+name = "thrussh-add"
+path = "src/thrussh-add.rs"

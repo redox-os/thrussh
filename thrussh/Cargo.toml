@@ -1,0 +1,63 @@
+[package]
+name = "thrussh"
+description = "A client and server SSH library."
+keywords = ["ssh"]
+version = "0.20.0"
+authors = ["Pierre-Étienne Meunier <pe@pijul.org>"]
+repository = "https://nest.pijul.com/pijul_org/thrussh"
+homepage = "https://pijul.org/thrussh"
+documentation = "https://docs.rs/thrussh"
+license = "Apache-2.0"
+include = [
+        "Cargo.toml",
+        "src/auth.rs",
+        "src/kex.rs",
+        "src/key.rs",
+        "src/lib.rs",
+        "src/msg.rs",
+        "src/negotiation.rs",
+        "src/pty.rs",
+        "src/session.rs",
+        "src/sshbuffer.rs",
+        "src/ssh_read.rs",
+        "src/tcp.rs",
+        "src/bin/client.rs",
+        "src/bin/server.rs",
+        "src/cipher/chacha20poly1305.rs",
+        "src/cipher/clear.rs",
+        "src/cipher/mod.rs",
+        "src/client/mod.rs",
+        "src/client/encrypted.rs",
+        "src/client/authenticate.rs",
+        "src/client/channel_open.rs",
+        "src/client/connection.rs",
+        "src/client/data.rs",
+        "src/client/kex.rs",
+        "src/client/session.rs",
+        "src/client/wait.rs",
+        "src/server/mod.rs",
+        "src/server/encrypted.rs",
+        "src/server/connection.rs",
+        "src/server/kex.rs",
+        "src/server/session.rs",
+        "src/sodium.rs",
+        "src/read_exact_from.rs"
+        ]
+
+[dependencies]
+byteorder = "1.1"
+bitflags = "1.0"
+log = "0.3"
+#thrussh-keys = "0.9.5"
+thrussh-keys = { path = "../thrussh-keys" }
+openssl = "0.10"
+thrussh-libsodium = "0.1"
+#cryptovec = "0.4.1"
+cryptovec = { path = "/home/wesley/Workspace/Rust/Redox/cryptovec" }
+tokio = { git = "https://github.com/redox-os/tokio" }
+tokio-io = { git = "https://github.com/redox-os/tokio" }
+futures = "0.1"
+tokio-timer = { git = "https://github.com/redox-os/tokio" }
+
+[dev-dependencies]
+env_logger = "0.5"

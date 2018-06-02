@@ -1,0 +1,16 @@
+[package]
+name = "thrussh-libsodium"
+version = "0.1.3"
+license = "Apache-2.0/MIT"
+description = "Straightforward bindings to libsodium"
+homepage = "https://nest.pijul.com/pijul_org/thrussh"
+repository = "https://nest.pijul.com/pijul_org/thrussh"
+authors = ["pe@pijul.org <pe@pijul.org>"]
+include = [ "build.rs", "Cargo.toml", "src/lib.rs" ]
+build = "build.rs"
+
+[dependencies]
+libc = "0.2"
+
+[build-dependencies]
+pkg-config = "0.3"
