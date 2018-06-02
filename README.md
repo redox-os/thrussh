@@ -16,7 +16,6 @@ By contributing, you agree to license all your contributions under the Apache 2.
 
 Moreover, the main platform for contributing is [the Nest](//nest.pijul.com/pijul_org/thrussh), which is still at an experimental stage. Therefore, even though we do our best to avoid it, our repository might be reset, causing the patches of all contributors to be merged.
 
-
 ## Issue Reporting
 
 Please report bugs on the [issue page of this repository](//nest.pijul.com/pijul_org/thrussh).
@@ -30,5 +29,4 @@ Please add to this section with anything you'd like others to know if you contri
 ```sh
 BUILD_DEPENDS=(openssl libsodium)
 ```
-- As in the Initial Commit message, attempting to build this patched crate for Linux or Redox will fail with the same 23 errors when attempting
-to build. I am sure that this is a dependency issue, because the original source & dep tree builds fine for Linux.
+- There are four crates in this repository, 3 of them build under redox: `thrussh`, `thrussh-keys`, and `thrussh-libsodium`. The fourth, `thrussh-agent`, depends on Unix specific features (sockets) that are not yet implemented to an adequate degree on Redox. It also requires two functions to be added to liblibc, and probably has a dependency issue. Kudos if anybody fixes this.
