@@ -17,7 +17,7 @@ use std::sync::Arc;
 use std;
 use futures::{Poll, Async};
 use futures::future::Future;
-use tokio_timer::Sleep;
+use tokio_timer::Delay;
 use tokio::net::TcpStream;
 use tokio::io::{WriteAll, Flush, flush};
 use tokio;
@@ -267,7 +267,7 @@ pub fn connect<
 >(
     addr: Addr,
     config: Arc<Config>,
-    timeout: Option<Sleep>,
+    timeout: Option<Delay>,
     handler: H,
     f: F,
 ) -> Result<I, HandlerError<E>> {
@@ -289,7 +289,7 @@ pub fn connect_future<
     >(
     addr: Addr,
     config: Arc<Config>,
-    timeout: Option<Sleep>,
+    timeout: Option<Delay>,
     handler: H,
     f: F,
 ) -> Result<ConnectFuture<H, I, E, X, F>, Error> {
@@ -310,7 +310,7 @@ pub struct ConnectFuture<H: Handler, I, E, X: Future<Item = I, Error = E>, F: Fn
     handler: Option<H>,
     config: Arc<Config>,
     state: Option<ConnectFutureState<X>>,
-    timeout: Option<Sleep>,
+    timeout: Option<Delay>,
     f: Option<F>
 }
 

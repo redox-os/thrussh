@@ -315,7 +315,7 @@ pub enum Error {
     Keys(thrussh_keys::Error),
 
     /// Timer error
-    Timer(tokio_timer::TimerError),
+    Timer(tokio_timer::Error),
 }
 
 /// Errors including those coming from handler. These are not included
@@ -421,8 +421,8 @@ impl From<openssl::error::ErrorStack> for Error {
     }
 }
 /*
-impl From<tokio_timer::TimerError> for Error {
-    fn from(e: tokio_timer::TimerError) -> Error {
+impl From<tokio_timer::Error> for Error {
+    fn from(e: tokio_timer::Error) -> Error {
         Error::Timer(e)
     }
 }
@@ -455,8 +455,8 @@ impl<E> From<thrussh_keys::Error> for HandlerError<E> {
     }
 }
 
-impl<E> From<tokio_timer::TimerError> for HandlerError<E> {
-    fn from(e: tokio_timer::TimerError) -> HandlerError<E> {
+impl<E> From<tokio_timer::Error> for HandlerError<E> {
+    fn from(e: tokio_timer::Error) -> HandlerError<E> {
         HandlerError::Error(Error::Timer(e))
     }
 }
