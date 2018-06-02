@@ -22,3 +22,13 @@ Moreover, the main platform for contributing is [the Nest](//nest.pijul.com/piju
 Please report bugs on the [issue page of this repository](//nest.pijul.com/pijul_org/thrussh).
 Thrussh has a full disclosure vulnerability policy.
 Please do NOT attempt to report any security vulnerability in this code privately to anybody.
+
+# Redox Porting Notes
+Please add to this section with anything you'd like others to know if you contribute to this port.
+
+- All deps have been taken care of. In order to compile for redox, openssl and libsodium must be set up on your system for redox building. I really have no idea how this works, there is a cookbook recipe for libsodium that works fine (I think), so clone this repo into a cookbook recipe `source/` and add this to your recipe.sh:
+```sh
+BUILD_DEPENDS=(openssl libsodium)
+```
+- As in the Initial Commit message, attempting to build this patched crate for Linux or Redox will fail with the same 23 errors when attempting
+to build. I am sure that this is a dependency issue, because the original source & dep tree builds fine for Linux.
