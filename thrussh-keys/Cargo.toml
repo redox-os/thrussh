@@ -34,7 +34,7 @@ tokio-core = { git = "https://github.com/redox-os/tokio-core" }
 tokio-io = { git = "https://github.com/redox-os/tokio" }
 futures = "0.1"
 #cryptovec = "0.4"
-cryptovec = { path = "/home/wesley/Workspace/Rust/Redox/cryptovec" }
+cryptovec = { git = "https://github.com/MggMuggins/cryptovec" }
 error-chain = "0.11"
 hex = "0.3"
 yasna = "0.1"
