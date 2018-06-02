@@ -7,7 +7,7 @@ use tokio::io::{AsyncRead, AsyncWrite};
 use ssh_read::SshRead;
 use tcp::Tcp;
 use tokio_io;
-use tokio_timer::Sleep;
+use tokio_timer::Delay;
 
 #[doc(hidden)]
 pub enum ConnectionState<R: AsyncRead + AsyncWrite, H: Handler> {
@@ -61,7 +61,7 @@ pub struct Connection<R: AsyncRead + AsyncWrite, H: Handler> {
     /// Handler for this connection.
     pub handler: Option<H>,
     #[doc(hidden)]
-    pub timeout: Option<Sleep>,
+    pub timeout: Option<Delay>,
 }
 
 impl<R: AsyncRead + AsyncWrite, H: Handler> std::ops::Deref
@@ -592,7 +592,7 @@ impl<R: AsyncRead + AsyncWrite, H: Handler> Connection<R, H> {
         config: Arc<Config>,
         stream: R,
         handler: H,
-        timeout: Option<Sleep>,
+        timeout: Option<Delay>,
     ) -> Result<Self, Error> {
         let mut write_buffer = SSHBuffer::new();
         write_buffer.send_ssh_id(config.as_ref().client_id.as_bytes());

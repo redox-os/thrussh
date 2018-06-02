@@ -4,9 +4,10 @@ use negotiation::Select;
 use msg;
 use negotiation;
 use std::sync::Arc;
+use std::time::Instant;
 use tcp::Tcp;
 use ssh_read::SshRead;
-use tokio_timer::{Timer, Sleep};
+use tokio_timer::{Timer, Delay};
 
 #[doc(hidden)]
 pub enum ConnectionState<R: AsyncRead + AsyncWrite + Tcp, H: Handler> {
@@ -31,7 +32,7 @@ pub enum PendingFuture<H: Handler> {
     RejectTimeout {
         handler: H,
         session: Session,
-        timeout: Sleep,
+        timeout: Delay,
     },
     ReadAuthRequest {
         session: Session,
@@ -48,7 +49,7 @@ pub struct Connection<R: AsyncRead + AsyncWrite + Tcp, H: Handler> {
     pub buffer: CryptoVec,
     pub buffer2: CryptoVec,
     pub handler: Option<H>,
-    pub timeout: Option<Sleep>,
+    pub timeout: Option<Delay>,
 }
 
 impl<R: AsyncRead + AsyncWrite + Tcp, H: Handler> Future for Connection<R, H> {
@@ -234,8 +235,7 @@ impl<H: Handler, R: AsyncRead + AsyncWrite + Tcp> Connection<R, H> {
         let mut write_buffer = SSHBuffer::new();
         write_buffer.send_ssh_id(config.as_ref().server_id.as_bytes());
         let timeout = if let Some(t) = config.connection_timeout {
-            let timer = Timer::default();
-            Some(timer.sleep(t))
+            Some(Delay::new(Instant::now() + t))
         } else {
             None
         };
@@ -349,7 +349,7 @@ impl<H: Handler, R: AsyncRead + AsyncWrite + Tcp> Connection<R, H> {
                             pending: PendingFuture::RejectTimeout {
                                 session,
                                 handler,
-                                timeout: timer.sleep(pre_auth - now + rejection_time)
+                                timeout: Delay::new(pre_auth + rejection_time)
                             },
                             stream,
                         });
